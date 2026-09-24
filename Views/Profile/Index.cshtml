@@ -1,0 +1,428 @@
+﻿```cshtml
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - Student Help Hub</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200">
+
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+
+                <div class="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-white text-xl">
+                    🎓
+                </div>
+
+                <div>
+                    <h1 class="font-bold text-gray-900">
+                        Student Help Hub
+                    </h1>
+
+                    <p class="text-xs text-gray-500">
+                        Student Services
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="p-4 space-y-1">
+
+            <a href="/Student/Dashboard"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                🏠
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+
+            <a href="/Timetable/Index"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                📅
+                <span class="text-sm font-medium">Timetable</span>
+            </a>
+
+            <a href="/LostFound/Index"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                🔎
+                <span class="text-sm font-medium">Lost & Found</span>
+            </a>
+
+            <a href="/Assistance/Index"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                🤝
+                <span class="text-sm font-medium">Assistance</span>
+            </a>
+
+            <a href="/Announcement/Index"
+               class="flex items-center justify-between px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+
+                <div class="flex items-center gap-3">
+                    📢
+                    <span class="text-sm font-medium">Announcements</span>
+                </div>
+
+                <span class="text-xs bg-red-500 text-white px-2 py-1 rounded-full">
+                    3
+                </span>
+
+            </a>
+
+            <a href="/Event/Index"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                🎉
+                <span class="text-sm font-medium">Events</span>
+            </a>
+
+            <a href="/CampusMap/Index"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                🗺️
+                <span class="text-sm font-medium">Campus Map</span>
+            </a>
+
+            <!-- Active Profile -->
+            <a href="/Profile/Index"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-700">
+
+                👤
+
+                <span class="text-sm font-semibold">
+                    My Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+        <!-- Bottom Navigation -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                ⚙️
+                <span class="text-sm font-medium">Settings</span>
+            </a>
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">
+                🚪
+                <span class="text-sm font-medium">Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="ml-64 min-h-screen">
+
+        <!-- Top Bar -->
+        <header class="bg-white border-b border-gray-200 px-8 py-5">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900">
+                        Welcome back, Student 👋
+                    </h2>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Manage your student profile
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-5">
+
+                    <button class="text-gray-500 hover:text-gray-700 text-xl">
+                        🔔
+                    </button>
+
+                    <div class="w-10 h-10 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
+                        S
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Page Content -->
+        <div class="p-8">
+
+            <!-- Page Heading -->
+            <div class="mb-6">
+
+                <h1 class="text-3xl font-bold text-gray-900">
+                    My Profile
+                </h1>
+
+                <p class="text-gray-500 mt-1">
+                    View and manage your student information
+                </p>
+
+            </div>
+
+
+            <!-- Profile Header -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+
+                <div class="flex items-center gap-6">
+
+                    <!-- Profile Picture -->
+                    <div class="w-24 h-24 rounded-full bg-blue-700 text-white flex items-center justify-center text-4xl font-bold">
+                        S
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Student Name
+                        </h2>
+
+                        <p class="text-gray-500 mt-1">
+                            Information Technology Student
+                        </p>
+
+                        <p class="text-sm text-gray-400 mt-1">
+                            Student Number: 2026XXXX
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Personal Information -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+
+                <div class="flex items-center justify-between mb-6">
+
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900">
+                            Personal Information
+                        </h2>
+
+                        <p class="text-sm text-gray-500 mt-1">
+                            Your basic student information
+                        </p>
+                    </div>
+
+                    <button class="px-4 py-2 bg-blue-700 text-white rounded-lg text-sm font-medium hover:bg-blue-800">
+                        Edit Profile
+                    </button>
+
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Full Name -->
+                    <div>
+                        <p class="text-sm text-gray-500">
+                            Full Name
+                        </p>
+
+                        <p class="mt-1 font-medium text-gray-900">
+                            Student Name
+                        </p>
+                    </div>
+
+
+                    <!-- Student Number -->
+                    <div>
+                        <p class="text-sm text-gray-500">
+                            Student Number
+                        </p>
+
+                        <p class="mt-1 font-medium text-gray-900">
+                            2026XXXX
+                        </p>
+                    </div>
+
+
+                    <!-- Email -->
+                    <div>
+                        <p class="text-sm text-gray-500">
+                            Email Address
+                        </p>
+
+                        <p class="mt-1 font-medium text-gray-900">
+                            student@example.com
+                        </p>
+                    </div>
+
+
+                    <!-- Programme -->
+                    <div>
+                        <p class="text-sm text-gray-500">
+                            Programme
+                        </p>
+
+                        <p class="mt-1 font-medium text-gray-900">
+                            Diploma in Information Technology
+                        </p>
+                    </div>
+
+
+                    <!-- Year -->
+                    <div>
+                        <p class="text-sm text-gray-500">
+                            Year of Study
+                        </p>
+
+                        <p class="mt-1 font-medium text-gray-900">
+                            3rd Year
+                        </p>
+                    </div>
+
+
+                    <!-- Campus -->
+                    <div>
+                        <p class="text-sm text-gray-500">
+                            Campus
+                        </p>
+
+                        <p class="mt-1 font-medium text-gray-900">
+                            Main Campus
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Student Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Academic Information -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+
+                    <h2 class="text-lg font-bold text-gray-900">
+                        Academic Information
+                    </h2>
+
+                    <div class="mt-5 space-y-4">
+
+                        <div>
+                            <p class="text-sm text-gray-500">
+                                Current Semester
+                            </p>
+
+                            <p class="font-medium text-gray-900">
+                                Semester 2
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-500">
+                                Faculty
+                            </p>
+
+                            <p class="font-medium text-gray-900">
+                                Information Technology
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-500">
+                                Student Status
+                            </p>
+
+                            <span class="inline-block mt-1 px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">
+                                Active
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Contact Information -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+
+                    <h2 class="text-lg font-bold text-gray-900">
+                        Contact Information
+                    </h2>
+
+                    <div class="mt-5 space-y-4">
+
+                        <div>
+                            <p class="text-sm text-gray-500">
+                                Email
+                            </p>
+
+                            <p class="font-medium text-gray-900">
+                                student@example.com
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-500">
+                                Phone
+                            </p>
+
+                            <p class="font-medium text-gray-900">
+                                +27 XX XXX XXXX
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-500">
+                                Emergency Contact
+                            </p>
+
+                            <p class="font-medium text-gray-900">
+                                Not provided
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
+```
+
+That gives you the **Profile UI only** for now. The `Edit Profile` button is intentionally just visual, since we're doing the pages first and functionality later.
+
+Once this loads correctly, **Profile is officially checked off the sidebar.** 👤✅
+

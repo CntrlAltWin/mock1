@@ -1,0 +1,753 @@
+﻿@{
+    ViewData["Title"] = "Timetable";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Help Hub - Timetable</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inter font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Page styling -->
+    <style>
+
+            /* Use Inter throughout the page */
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+
+    </style>
+
+</head>
+
+
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Main application -->
+    <div class="min-h-screen flex">
+
+
+        <!-- ========================= -->
+        <!-- SIDEBAR -->
+        <!-- ========================= -->
+
+        <aside class="w-64 bg-gray-100 border-r border-gray-200 flex flex-col fixed inset-y-0 left-0 z-20">
+
+
+            <!-- Logo -->
+            <div class="px-6 py-6 border-b border-gray-200">
+
+                <div class="flex items-center gap-3">
+
+                    <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold">
+                        SH
+                    </div>
+
+                    <div>
+
+                        <h1 class="font-bold text-gray-900">
+                            Student Help Hub
+                        </h1>
+
+                        <p class="text-xs text-gray-500">
+                            Student Services
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+
+
+                <!-- Dashboard -->
+                <a href="/Student/Dashboard"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        🏠
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <!-- Timetable -->
+                <a href="/Timetable/Index"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-50 text-blue-700 font-semibold">
+
+                    <span class="w-6 text-center">
+                        📅
+                    </span>
+
+                    <span>
+                        Timetable
+                    </span>
+
+                </a>
+
+
+                <!-- Lost and Found -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        🔎
+                    </span>
+
+                    <span>
+                        Lost & Found
+                    </span>
+
+                </a>
+
+
+                <!-- Assistance -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        🤝
+                    </span>
+
+                    <span>
+                        Assistance
+                    </span>
+
+                </a>
+
+
+                <!-- Announcements -->
+                <a href="#"
+                   class="flex items-center justify-between px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <div class="flex items-center gap-3">
+
+                        <span class="w-6 text-center">
+                            📢
+                        </span>
+
+                        <span>
+                            Announcements
+                        </span>
+
+                    </div>
+
+                    <span class="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-1 rounded-full">
+                        3
+                    </span>
+
+                </a>
+
+
+                <!-- Events -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        🎫
+                    </span>
+
+                    <span>
+                        Events
+                    </span>
+
+                </a>
+
+
+                <!-- Campus Map -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        🗺️
+                    </span>
+
+                    <span>
+                        Campus Map
+                    </span>
+
+                </a>
+
+
+                <!-- Profile -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        👤
+                    </span>
+
+                    <span>
+                        My Profile
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- Bottom navigation -->
+            <div class="px-4 py-5 border-t border-gray-200 space-y-1">
+
+                <!-- Settings -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-blue-700 transition-all">
+
+                    <span class="w-6 text-center">
+                        ⚙️
+                    </span>
+
+                    <span>
+                        Settings
+                    </span>
+
+                </a>
+
+
+                <!-- Logout -->
+                <a href="#"
+                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-white hover:text-red-600 transition-all">
+
+                    <span class="w-6 text-center">
+                        ↪
+                    </span>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- ========================= -->
+        <!-- MAIN CONTENT -->
+        <!-- ========================= -->
+
+        <main class="ml-64 flex-1 min-w-0">
+
+
+            <!-- Top bar -->
+            <header class="bg-white border-b border-gray-200">
+
+                <div class="px-8 py-5 flex items-center justify-between">
+
+                    <div>
+
+                        <h2 class="text-xl font-bold text-gray-900">
+                            Welcome back, Student 👋
+                        </h2>
+
+                        <p class="text-sm text-gray-500 mt-1">
+                            Here's your academic timetable.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Profile -->
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-10 h-10 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
+                            S
+                        </div>
+
+                        <div class="hidden sm:block">
+
+                            <p class="text-sm font-semibold">
+                                Student
+                            </p>
+
+                            <p class="text-xs text-gray-500">
+                                Student
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ========================= -->
+            <!-- TIMETABLE CONTENT -->
+            <!-- ========================= -->
+
+            <div class="px-8 py-8">
+
+                <div class="max-w-7xl mx-auto">
+
+
+                    <!-- Page heading -->
+                    <div class="mb-8">
+
+                        <h1 class="text-3xl font-bold text-gray-900">
+                            Timetable
+                        </h1>
+
+                        <p class="text-gray-500 mt-2">
+                            View your classes for the current week.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- Week selector -->
+                    <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
+
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+
+
+                            <!-- Previous week -->
+                            <button class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50">
+                                ← Previous
+                            </button>
+
+
+                            <!-- Current week -->
+                            <div class="text-center">
+
+                                <p class="text-sm text-gray-500">
+                                    Current Week
+                                </p>
+
+                                <p class="font-bold text-gray-900">
+                                    21 - 25 September 2026
+                                </p>
+
+                            </div>
+
+
+                            <!-- Next week -->
+                            <button class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50">
+                                Next →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Timetable -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+
+
+                        <!-- Desktop timetable -->
+                        <div class="overflow-x-auto">
+
+                            <table class="w-full min-w-[900px]">
+
+                                <!-- Table header -->
+                                <thead>
+
+                                    <tr class="border-b border-gray-200">
+
+                                        <th class="w-24 px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                                            Time
+                                        </th>
+
+                                        <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                                            Monday
+                                        </th>
+
+                                        <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                                            Tuesday
+                                        </th>
+
+                                        <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                                            Wednesday
+                                        </th>
+
+                                        <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                                            Thursday
+                                        </th>
+
+                                        <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                                            Friday
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <!-- Table body -->
+                                <tbody>
+
+
+                                    <!-- 08:00 -->
+                                    <tr class="border-b border-gray-100">
+
+                                        <td class="px-5 py-5 text-sm font-bold text-blue-700 align-top">
+                                            08:00
+                                        </td>
+
+
+                                        <!-- Monday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-blue-50 border-l-4 border-blue-700 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    GID226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Graphic User Interface Design
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Room 201
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- Tuesday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+
+                                        <!-- Wednesday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-orange-50 border-l-4 border-orange-500 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    SOE226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Systems Engineering
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Lab 3
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- Thursday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+
+                                        <!-- Friday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    SOD226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Systems Development
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Lab 2
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <!-- 10:00 -->
+                                    <tr class="border-b border-gray-100">
+
+                                        <td class="px-5 py-5 text-sm font-bold text-blue-700 align-top">
+                                            10:00
+                                        </td>
+
+
+                                        <!-- Monday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+
+                                        <!-- Tuesday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-purple-50 border-l-4 border-purple-500 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    TPG226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Technical Programming
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Lab 1
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- Wednesday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+
+                                        <!-- Thursday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-blue-50 border-l-4 border-blue-700 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    INT226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Internet Technologies
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Lab 4
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- Friday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <!-- 13:00 -->
+                                    <tr>
+
+                                        <td class="px-5 py-5 text-sm font-bold text-blue-700 align-top">
+                                            13:00
+                                        </td>
+
+
+                                        <!-- Monday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-red-50 border-l-4 border-red-500 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    SQA226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Software Quality Assurance
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Room 105
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- Tuesday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+
+                                        <!-- Wednesday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+
+                                        <!-- Thursday -->
+                                        <td class="px-5 py-5 align-top">
+
+                                            <div class="bg-orange-50 border-l-4 border-orange-500 rounded-lg p-3">
+
+                                                <p class="font-bold text-sm">
+                                                    GUD226C
+                                                </p>
+
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    Graphic User Design
+                                                </p>
+
+                                                <p class="text-xs text-gray-400 mt-2">
+                                                    Studio 2
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- Friday -->
+                                        <td class="px-5 py-5 align-top text-sm text-gray-400">
+                                            -
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Today's classes -->
+                    <div class="mt-6 bg-white rounded-xl shadow-sm p-6">
+
+                        <h2 class="text-lg font-bold text-gray-900">
+                            Today's Classes
+                        </h2>
+
+                        <p class="text-sm text-gray-500 mt-1 mb-5">
+                            Your schedule for today.
+                        </p>
+
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+
+                            <!-- Class -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+
+                                <p class="text-sm font-bold text-blue-700">
+                                    08:00 - 10:00
+                                </p>
+
+                                <p class="font-bold text-gray-900 mt-2">
+                                    GID226C
+                                </p>
+
+                                <p class="text-sm text-gray-500">
+                                    Graphic User Interface Design
+                                </p>
+
+                                <p class="text-xs text-gray-400 mt-2">
+                                    Room 201
+                                </p>
+
+                            </div>
+
+
+                            <!-- Class -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+
+                                <p class="text-sm font-bold text-blue-700">
+                                    10:15 - 12:15
+                                </p>
+
+                                <p class="font-bold text-gray-900 mt-2">
+                                    SOE226C
+                                </p>
+
+                                <p class="text-sm text-gray-500">
+                                    Systems Engineering
+                                </p>
+
+                                <p class="text-xs text-gray-400 mt-2">
+                                    Lab 3
+                                </p>
+
+                            </div>
+
+
+                            <!-- Class -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+
+                                <p class="text-sm font-bold text-blue-700">
+                                    13:00 - 15:00
+                                </p>
+
+                                <p class="font-bold text-gray-900 mt-2">
+                                    SOD226C
+                                </p>
+
+                                <p class="text-sm text-gray-500">
+                                    Systems Development
+                                </p>
+
+                                <p class="text-xs text-gray-400 mt-2">
+                                    Lab 2
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
