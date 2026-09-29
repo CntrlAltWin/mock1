@@ -1,7 +1,9 @@
-﻿```cshtml
+@model mock1.Models.Student
+
 @{
     ViewData["Title"] = "My Profile";
     Layout = null;
+    var user = (mock1.Models.User)ViewBag.User;
 }
 
 <!DOCTYPE html>
@@ -20,9 +22,9 @@
           rel="stylesheet">
 
     <style>
-            body {
-                font-family: 'Inter', sans-serif;
-            }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
     </style>
 </head>
 
@@ -149,7 +151,7 @@
 
                 <div>
                     <h2 class="text-xl font-bold text-gray-900">
-                        Welcome back, Student 👋
+                        Welcome back, @user.FullName 👋
                     </h2>
 
                     <p class="text-sm text-gray-500 mt-1">
@@ -164,7 +166,7 @@
                     </button>
 
                     <div class="w-10 h-10 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
-                        S
+                        @user.FullName.Substring(0, 1).ToUpper()
                     </div>
 
                 </div>
@@ -198,21 +200,21 @@
 
                     <!-- Profile Picture -->
                     <div class="w-24 h-24 rounded-full bg-blue-700 text-white flex items-center justify-center text-4xl font-bold">
-                        S
+                        @user.FullName.Substring(0, 1).ToUpper()
                     </div>
 
                     <div>
 
                         <h2 class="text-2xl font-bold text-gray-900">
-                            Student Name
+                            @user.FullName
                         </h2>
 
                         <p class="text-gray-500 mt-1">
-                            Information Technology Student
+                            @Model.Course
                         </p>
 
                         <p class="text-sm text-gray-400 mt-1">
-                            Student Number: 2026XXXX
+                            Student Number: @Model.StudentNumber
                         </p>
 
                     </div>
@@ -253,7 +255,7 @@
                         </p>
 
                         <p class="mt-1 font-medium text-gray-900">
-                            Student Name
+                            @user.FullName
                         </p>
                     </div>
 
@@ -265,7 +267,7 @@
                         </p>
 
                         <p class="mt-1 font-medium text-gray-900">
-                            2026XXXX
+                            @Model.StudentNumber
                         </p>
                     </div>
 
@@ -277,19 +279,19 @@
                         </p>
 
                         <p class="mt-1 font-medium text-gray-900">
-                            student@example.com
+                            @user.Email
                         </p>
                     </div>
 
 
-                    <!-- Programme -->
+                    <!-- Course -->
                     <div>
                         <p class="text-sm text-gray-500">
-                            Programme
+                            Course
                         </p>
 
                         <p class="mt-1 font-medium text-gray-900">
-                            Diploma in Information Technology
+                            @Model.Course
                         </p>
                     </div>
 
@@ -301,113 +303,20 @@
                         </p>
 
                         <p class="mt-1 font-medium text-gray-900">
-                            3rd Year
+                            @Model.YearLevel
                         </p>
                     </div>
 
 
-                    <!-- Campus -->
+                    <!-- Phone -->
                     <div>
                         <p class="text-sm text-gray-500">
-                            Campus
+                            Phone
                         </p>
 
                         <p class="mt-1 font-medium text-gray-900">
-                            Main Campus
+                            @(string.IsNullOrEmpty(Model.Phone) ? "Not provided" : Model.Phone)
                         </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Student Information -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                <!-- Academic Information -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-
-                    <h2 class="text-lg font-bold text-gray-900">
-                        Academic Information
-                    </h2>
-
-                    <div class="mt-5 space-y-4">
-
-                        <div>
-                            <p class="text-sm text-gray-500">
-                                Current Semester
-                            </p>
-
-                            <p class="font-medium text-gray-900">
-                                Semester 2
-                            </p>
-                        </div>
-
-                        <div>
-                            <p class="text-sm text-gray-500">
-                                Faculty
-                            </p>
-
-                            <p class="font-medium text-gray-900">
-                                Information Technology
-                            </p>
-                        </div>
-
-                        <div>
-                            <p class="text-sm text-gray-500">
-                                Student Status
-                            </p>
-
-                            <span class="inline-block mt-1 px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">
-                                Active
-                            </span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Contact Information -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-
-                    <h2 class="text-lg font-bold text-gray-900">
-                        Contact Information
-                    </h2>
-
-                    <div class="mt-5 space-y-4">
-
-                        <div>
-                            <p class="text-sm text-gray-500">
-                                Email
-                            </p>
-
-                            <p class="font-medium text-gray-900">
-                                student@example.com
-                            </p>
-                        </div>
-
-                        <div>
-                            <p class="text-sm text-gray-500">
-                                Phone
-                            </p>
-
-                            <p class="font-medium text-gray-900">
-                                +27 XX XXX XXXX
-                            </p>
-                        </div>
-
-                        <div>
-                            <p class="text-sm text-gray-500">
-                                Emergency Contact
-                            </p>
-
-                            <p class="font-medium text-gray-900">
-                                Not provided
-                            </p>
-                        </div>
-
                     </div>
 
                 </div>
@@ -420,9 +329,3 @@
 
 </body>
 </html>
-```
-
-That gives you the **Profile UI only** for now. The `Edit Profile` button is intentionally just visual, since we're doing the pages first and functionality later.
-
-Once this loads correctly, **Profile is officially checked off the sidebar.** 👤✅
-
