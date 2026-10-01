@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using mock1.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace mock1.Controllers
 {
@@ -15,24 +16,81 @@ namespace mock1.Controllers
 
         public IActionResult Index()
         {
-            // TEMPORARY: no login system exists yet, so this shows the
-            // first student in the database. Once Auth is built, replace
-            // this with a lookup by the logged-in user's session/UserId,
-            // e.g.:
-            //   var userId = HttpContext.Session.GetInt32("UserId");
-            //   var student = context.Students.FirstOrDefault(s => s.UserId == userId);
-            var student = context.Students.FirstOrDefault();
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
 
-            if (student == null)
-                return NotFound("No student records exist yet.");
+            var student = context.Students.FirstOrDefault(s => s.UserId == userId);
+            var user = context.Users.FirstOrDefault(u => u.UserId == userId);
 
-            var user = context.Users.FirstOrDefault(u => u.UserId == student.UserId);
-
-            if (user == null)
-                return NotFound("No matching user account found for this student.");
+            if (student == null || user == null)
+                return RedirectToAction("Login", "Auth");
 
             ViewBag.User = user;
             return View(student);
+        }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            var student = context.Students.FirstOrDefault(s => s.UserId == userId);
+            var user = context.Users.FirstOrDefault(u => u.UserId == userId);
+
+            if (student == null || user == null)
+                return RedirectToAction("Login", "Auth");
+
+            ViewBag.User = user;
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(string fullName, string course, string yearLevel, string phone)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            var student = context.Students.FirstOrDefault(s => s.UserId == userId);
+            var user = context.Users.FirstOrDefault(u => u.UserId == userId);
+
+            if (student == null || user == null)
+                return RedirectToAction("Login", "Auth");
+
+            if (string.IsNullOrWhiteSpace(fullName) || !Regex.IsMatch(fullName, @"^[A-Za-z\s]+$"))
+            {
+                ViewBag.Error = "Full name can only contain letters and spaces.";
+                ViewBag.User = user;
+                return View(student);
+            }
+
+            if (string.IsNullOrWhiteSpace(course) || !Regex.IsMatch(course, @"^[A-Za-z\s]+$"))
+            {
+                ViewBag.Error = "Course can only contain letters and spaces.";
+                ViewBag.User = user;
+                return View(student);
+            }
+
+            if (!string.IsNullOrWhiteSpace(phone) && !Regex.IsMatch(phone, @"^0\d{9}$"))
+            {
+                ViewBag.Error = "Phone number must be 10 digits starting with 0.";
+                ViewBag.User = user;
+                return View(student);
+            }
+
+            user.FullName = fullName;
+            student.Course = course;
+            student.YearLevel = yearLevel;
+            student.Phone = string.IsNullOrWhiteSpace(phone) ? null : phone;
+
+            context.SaveChanges();
+            HttpContext.Session.SetString("FullName", user.FullName);
+
+            TempData["Success"] = "Profile updated successfully.";
+            return RedirectToAction("Index");
         }
     }
 }
