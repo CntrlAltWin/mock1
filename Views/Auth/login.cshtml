@@ -1,5 +1,96 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    ViewData["Title"] = "Login";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Student Help Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @@keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.5s ease-out forwards; }
+        @@keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+        .float-slow { animation: floatSlow 5s ease-in-out infinite; }
+        .input-field { transition: box-shadow 0.15s ease, border-color 0.15s ease; }
+        .input-field:focus {
+            outline: none;
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+        }
+        .btn-primary { transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(29, 78, 216, 0.25); }
+        .btn-primary:active { transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex">
+
+    <div class="hidden lg:flex lg:w-2/5 bg-gradient-to-br from-blue-700 to-blue-900 text-white relative overflow-hidden flex-col justify-between p-12">
+        <svg class="w-64 h-64 absolute -right-10 -top-10 opacity-10 float-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.42A12.083 12.083 0 0118 15c0 2.21-3 6-6 6s-6-3.79-6-6c0-1.42.42-2.74 1.16-3.86L12 14z"/>
+        </svg>
+        <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-white/15 backdrop-blur rounded-lg flex items-center justify-center text-2xl">🎓</div>
+            <span class="font-bold text-lg">Student Help Hub</span>
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold leading-tight mb-3">Welcome back.</h1>
+            <p class="text-blue-100 text-sm leading-relaxed max-w-sm">
+                Sign in to view your timetable, announcements, and everything else
+                Student Help Hub keeps in one place.
+            </p>
+        </div>
+        <p class="text-xs text-blue-200">© 2026 Student Help Hub · Central University of Technology</p>
+    </div>
+
+    <div class="flex-1 flex items-center justify-center p-6 sm:p-10">
+        <div class="fade-in bg-white rounded-xl shadow-sm p-8 w-full max-w-sm">
+
+            <div class="flex items-center gap-3 mb-6 lg:hidden">
+                <div class="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-white text-xl">🎓</div>
+                <div><h1 class="font-bold text-gray-900">Student Help Hub</h1></div>
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-900 mb-1">Sign in</h2>
+            <p class="text-sm text-gray-500 mb-6">Use your CUT student email</p>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="bg-red-50 text-red-600 text-sm rounded-lg p-3 mb-4">@ViewBag.Error</div>
+            }
+
+            <form method="post" asp-controller="Auth" asp-action="Login" class="space-y-4">
+                <div>
+                    <label class="text-sm font-medium text-gray-700">Student Email</label>
+                    <input type="email" name="email" placeholder="223022568@@stud.cut.ac.za"
+                           class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" required />
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" name="password"
+                           class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" required />
+                </div>
+                <button type="submit" class="btn-primary w-full bg-blue-700 text-white rounded-lg py-2.5 text-sm font-semibold hover:bg-blue-800">
+                    Sign In
+                </button>
+            </form>
+
+            <p class="text-sm text-gray-500 mt-5 text-center">
+                Don't have an account?
+                <a asp-controller="Auth" asp-action="Register" class="text-blue-700 font-medium hover:underline">Register</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

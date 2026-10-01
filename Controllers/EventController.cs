@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace mock1.Controllers
 {
     public class EventController : Controller
     {
-        // Opens the events page
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+                return RedirectToAction("Login", "Auth");
+
             return View();
         }
     }
