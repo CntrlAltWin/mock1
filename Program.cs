@@ -10,33 +10,31 @@ namespace mock1
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseRouting();
 
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Auth}/{action=Register}/{id?}")
                 .WithStaticAssets();
 
-            // ---- TEMPORARY SEED DATA ----
-            // Creates one test student so the Profile page has something
-            // real to display before Auth/login exists. Remove this block
-            // once registration is built and real accounts are created.
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -47,7 +45,8 @@ namespace mock1
                     var testUser = new User
                     {
                         FullName = "Test Student",
-                        Email = "test.student@studenthelphub.co.za",
+                        Email = "223022568@stud.cut.ac.za",
+                        Password = BCrypt.Net.BCrypt.HashPassword("password123"),
                         Role = UserRole.Student
                     };
                     db.Users.Add(testUser);
@@ -56,7 +55,7 @@ namespace mock1
                     db.Students.Add(new Student
                     {
                         UserId = testUser.UserId,
-                        StudentNumber = "2026001234",
+                        StudentNumber = "223022568",
                         Course = "Diploma in Information Technology",
                         YearLevel = "2",
                         Phone = "0821234567"
