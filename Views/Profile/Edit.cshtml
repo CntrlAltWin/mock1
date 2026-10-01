@@ -1,0 +1,190 @@
+@model mock1.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Profile";
+    Layout = null;
+    var user = (mock1.Models.User)ViewBag.User;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Student Help Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @@keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.4s ease-out forwards; }
+        .input-field { transition: box-shadow 0.15s ease, border-color 0.15s ease; }
+        .input-field:focus {
+            outline: none;
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+        }
+        .input-field:disabled { background-color: #f9fafb; color: #9ca3af; }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200">
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-white text-xl">🎓</div>
+                <div>
+                    <h1 class="font-bold text-gray-900">Student Help Hub</h1>
+                    <p class="text-xs text-gray-500">Student Services</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="p-4 space-y-1">
+            <a href="/Student/Dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">🏠<span class="text-sm font-medium">Dashboard</span></a>
+            <a href="/Timetable/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">📅<span class="text-sm font-medium">Timetable</span></a>
+            <a href="/LostFound/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">🔎<span class="text-sm font-medium">Lost &amp; Found</span></a>
+            <a href="/Assistance/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">🤝<span class="text-sm font-medium">Assistance</span></a>
+            <a href="/Announcement/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">📢<span class="text-sm font-medium">Announcements</span></a>
+            <a href="/Event/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">🎉<span class="text-sm font-medium">Events</span></a>
+            <a href="/CampusMap/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">🗺️<span class="text-sm font-medium">Campus Map</span></a>
+            <a href="/Profile/Index" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">👤<span class="text-sm font-medium">My Profile</span></a>
+        </nav>
+
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">⚙️<span class="text-sm font-medium">Settings</span></a>
+            <a asp-controller="Auth" asp-action="Logout" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100">🚪<span class="text-sm font-medium">Logout</span></a>
+        </div>
+    </aside>
+
+    <main class="ml-64 min-h-screen">
+
+        <header class="bg-white border-b border-gray-200 px-8 py-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900">Edit Profile</h2>
+                    <p class="text-sm text-gray-500 mt-1">Update your student information</p>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div class="w-10 h-10 rounded-full bg-blue-700 text-white flex items-center justify-center font-bold">
+                        @user.FullName.Substring(0, 1).ToUpper()
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8">
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="bg-red-50 text-red-600 text-sm rounded-lg p-3 mb-6 fade-in">@ViewBag.Error</div>
+            }
+
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-3xl font-bold text-gray-900">Edit Details</h1>
+                <div class="flex gap-3">
+                    <a asp-action="Index" class="bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-all">
+                        Cancel
+                    </a>
+                    <button type="submit" form="editForm" class="bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-800 transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <div class="lg:col-span-1 fade-in">
+                    <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-sm p-6 text-white">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-semibold tracking-wide opacity-80">STUDENT ID</span>
+                            <span class="text-xs font-semibold tracking-wide opacity-80">CUT</span>
+                        </div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-white text-blue-700 rounded-lg flex items-center justify-center text-2xl font-bold shrink-0">
+                                @user.FullName.Substring(0, 1).ToUpper()
+                            </div>
+                            <div>
+                                <p class="font-bold text-lg leading-tight">@user.FullName</p>
+                                <p class="text-sm text-blue-100">@Model.Course</p>
+                                <p class="text-xs text-blue-200 mt-1">Student No: @Model.StudentNumber</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 flex flex-col items-center">
+                            <div class="w-20 h-20 bg-gray-100 rounded flex items-center justify-center text-gray-400 font-bold text-sm">QR</div>
+                        </div>
+                        <p class="text-xs text-blue-200 mt-3 text-center leading-relaxed">
+                            Card updates after you save changes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-lg font-bold text-gray-900 mb-1">Personal Information</h2>
+                        <p class="text-sm text-gray-500 mb-6">Greyed-out fields cannot be changed</p>
+
+                        <form id="editForm" asp-controller="Profile" asp-action="Edit" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Full Name</label>
+                                <input type="text" name="fullName" value="@user.FullName"
+                                       pattern="[A-Za-z\s]+" required
+                                       class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" />
+                            </div>
+
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Student Number</label>
+                                <input type="text" value="@Model.StudentNumber" disabled
+                                       class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" />
+                            </div>
+
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Course</label>
+                                <input type="text" name="course" value="@Model.Course"
+                                       pattern="[A-Za-z\s]+" required
+                                       class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" />
+                            </div>
+
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Year of Study</label>
+                                <select name="yearLevel" class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" required>
+                                    @foreach (var y in new[] { "1", "2", "3", "4" })
+                                    {
+                                        if (Model.YearLevel == y)
+                                        {
+                                            <option value="@y" selected>@y</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@y">@y</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" value="@user.Email" disabled
+                                       class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" />
+                            </div>
+
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Phone</label>
+                                <input type="tel" name="phone" value="@Model.Phone" maxlength="10" pattern="0\d{9}"
+                                       class="input-field w-full border border-gray-200 rounded-lg px-3 py-2 mt-1 text-sm" />
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>
